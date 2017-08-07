@@ -28,8 +28,13 @@ namespace scotiabank_assignment_sudoku
 
                 // validate numbers
                 //
-                var hasValidNumbers = row.Count(p => p > this.gridSize ) == 0;
-                if (!hasValidNumbers) 
+                if (!(row.Count(p => p < 1) == 0))
+                {
+                    throw new SudokuValidatorException(
+                        String.Format("Row {0} contains invalid numbers (smaller than 1)", i+1));
+                }
+
+                if (!(row.Count(p => p > this.gridSize) == 0))
                 {
                 	throw new SudokuValidatorException(
                         String.Format("Row {0} contains invalid numbers (bigger than {1})", i+1, this.gridSize));
